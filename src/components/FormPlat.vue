@@ -13,7 +13,7 @@
         class="col"
         :bg-color="inputsValid.name ? 'lightGray' : 'red'"
         :standout="inputsValid.name  ? 'bg-grey text-black' : 'bg-red text-white'"
-        :placeholder="inputsValid.name ? '' : 'La description ne doit pas dépasser 155 caracteres'" />
+        :hint="inputsValid.name ? '' : 'Le nom ne doit pas dépasser 20 caracteres et est obligatoire'" />
     </div>
 
     <div class="row q-mb-md">
@@ -25,7 +25,7 @@
         class="col"
         :bg-color="inputsValid.description ? 'lightGray' : 'red'"
         :standout="inputsValid.description  ? 'bg-grey text-black' : 'bg-red text-white'"
-        :placeholder="inputsValid.description ? '' : 'Le nom ne doit pas dépasser 20 caracteres'"/>
+        :hint="inputsValid.description ? '' : 'La description ne doit pas dépasser 155 caracteres'"/>
     </div>
 
     <div class="row q-mb-md">
@@ -72,7 +72,7 @@
 import {mapActions} from "vuex";
 
 export default {
-  props: ['action'],
+  props: ['action', 'platToModify'],
   data () {
     return {
       plat: {
@@ -88,20 +88,46 @@ export default {
     }
   },
   computed: {
+    // Retourne si le champ de saisi du nom est valide
     isNameValid () {
       return this.plat.name.length <= 20 && this.plat.name.length > 0
     },
+    // Retourne si le champ de saisi de la description est valide
     isDescriptionValid() {
-      return this.plat.description.length <= 155 && this.plat.description.length > 0
+      return this.plat.description.length <= 155
     },
   },
   methods: {
-    ...mapActions('plats', ['addPlat']),
-    verifiyInputs() {
-      this.inputsValid.name = this.isNameValid
-      this.inputsValid.description = this.isDescriptionValid
+    // Mapage des actions du store
+    ...mapActions('plats', ['addPlat', 'modifyPlat']),
 
-      if (this.inputsValid.name && this.inputsValid.description) this.addPlat(this.plat)
+    // Verification des champs de saisies du formulaire
+    verifiyInputs() {
+      this.inputsValid.name = this.isNameValid // Verification du nom
+      this.inputsValid.description = this.isDescriptionValid // Verification de la description
+
+      if (this.inputsValid.name && this.inputsValid.description) this.formSubmit()
+    },
+    // Envoie du formulaire
+    formSubmit () {
+    if (this.plat.id) {
+        // Construction du payload
+        const payload = {
+          id: this.plat.id,
+          updates: this.plat // Passe toutes les proprités du plat actuel
+        }
+        // Appel l'action modifyPlat et lui passe le payload
+        this.modifyPlat(payload)
+      } else {
+        // Appel l'action addPlat et lui passe le plat
+        this.addPlat(this.plat)
+      }
+    }
+  },
+  mounted () {
+    if (this.platToModify) {
+      // Copie les propriétés de platToModify dans un nouvel objet vide
+      this.plat = Object.assign({}, this.platToModify)
     }
   }
 }

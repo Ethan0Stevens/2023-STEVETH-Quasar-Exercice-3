@@ -44,6 +44,16 @@ const mutations = {
   },
   addPlat(state, plat) {
     state.plats.push(plat)
+  },
+  modifyPlat (state, payload) {
+    // Recherche le plat et retourne sa position dans le tableau, son index
+    const index = state.plats.findIndex(el => el.id === payload.id)
+
+    // Si un plat a été trouvée
+    if (index !== -1) {
+      // Modifie l'objet trouvé avec les nouvelles valeurs
+      Object.assign(state.plats[index], payload.updates)
+    }
   }
 }
 /*
@@ -51,10 +61,10 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
-  deletePlat (context, plat) {
-    context.commit('deletePlat', plat)
+  deletePlat ({ commit }, plat) {
+    commit('deletePlat', plat)
   },
-  addPlat (context, plat) {
+  addPlat ({ commit }, plat) {
     let uId = 1
     // Si le tableau contient des éléments
     if (state.plats.length) {
@@ -64,7 +74,11 @@ const actions = {
     // Ajoute le nouvel id à la tache
     plat.id = uId
     // Commite l'ajout
-    context.commit('addPlat', plat)
+    commit('addPlat', plat)
+  },
+  modifyPlat ({ commit }, payload) {
+    // Valide la mutation et y passe les données
+    commit('modifyPlat', payload)
   }
 }
 

@@ -21,7 +21,9 @@
     />
   </q-card-section>
 
-  <q-card-section class="description">
+  <q-card-section class="description" >
+    <!-- Affiche le text 'Aucune description fournie' en cas de description vide -->
+    <i v-show="plat.description.length === 0">Aucune description fournie</i>
     {{ plat.description }}
   </q-card-section>
 
@@ -42,8 +44,9 @@
 
   <q-dialog
     v-model="afficherFormPlat">
-    <form-plat action="modifier" />
+    <form-plat action="modifier" :platToModify="plat"/>
   </q-dialog>
+
 </q-card>
 </template>
 
@@ -62,7 +65,8 @@ export default {
     'form-plat': require('components/FormPlat.vue').default
   },
   methods: {
-    ...mapActions('plats', ['deletePlat']),
+    // Mapage des actions du store
+    ...mapActions('plats', ['deletePlat', 'modifyPlat']),
     customBtn () {
       this.$q.dialog({
         title: 'Confirmation',

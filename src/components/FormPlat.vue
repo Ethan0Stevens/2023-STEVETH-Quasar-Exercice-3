@@ -106,6 +106,7 @@ export default {
       this.inputsValid.name = this.isNameValid // Verification du nom
       this.inputsValid.description = this.isDescriptionValid // Verification de la description
 
+      // Si tout les champs de saisis sont correct ,alors envoyer le formulaire
       if (this.inputsValid.name && this.inputsValid.description) this.formSubmit()
     },
     // Envoie du formulaire

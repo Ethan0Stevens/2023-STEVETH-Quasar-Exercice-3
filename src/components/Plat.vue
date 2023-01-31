@@ -7,7 +7,7 @@
     contain
   >
     <div class="absolute-bottom text-h6">
-      {{ plat.nom }}
+      {{ plat.name }}
     </div>
   </q-img>
 

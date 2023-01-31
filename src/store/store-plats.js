@@ -5,21 +5,21 @@ const state = {
     {
       id: 1,
       image: 'https://i.imgur.com/0umadnY.jpg',
-      nom: 'Burger',
+      name: 'Burger',
       description: "Un hamburger est un sandwich composé d'une ou plusieurs tranches de viande hachée, généralement du bœuf, placées dans un petit pain ou une brioche.",
       note: 4
     },
     {
       id: 2,
       image: 'https://i.imgur.com/b9zDbyb.jpg',
-      nom: 'Pizza',
+      name: 'Pizza',
       description: "La pizza est un plat savoureux d'origine italienne, consistant en une base généralement ronde et aplatie de pâte levée à base de blé.",
       note: 5
     },
     {
       id: 3,
       image: 'https://i.imgur.com/RbKjUjB.jpg',
-      nom: 'Petits choux',
+      name: 'Petits choux',
       description:
         'Le chou de Bruxelles est une variété de chou, plante herbacée de la famille des Brassicaceae. C’est vraiement pas bon...',
       note: 1
@@ -27,7 +27,7 @@ const state = {
     {
       id: 4,
       image: 'https://i.imgur.com/xAuhNVg.jpg',
-      nom: 'BBQ Ribs',
+      name: 'BBQ Ribs',
       description: 'Les BBQ ribs ou barbecue ribs sont des grands classiques très appréciés partout dans le monde.',
       note: 5
     }
@@ -41,6 +41,9 @@ Les mutations ne peuvent pas être asynchrones !!!
 const mutations = {
   deletePlat(state, plat) {
     state.plats.splice(state.plats.indexOf(plat), 1)
+  },
+  addPlat(state, plat) {
+    state.plats.push(plat)
   }
 }
 /*
@@ -50,6 +53,18 @@ Elles peuvent être asynchrones !
 const actions = {
   deletePlat (context, plat) {
     context.commit('deletePlat', plat)
+  },
+  addPlat (context, plat) {
+    let uId = 1
+    // Si le tableau contient des éléments
+    if (state.plats.length) {
+      // Récupère l'id MAX et lui ajoute 1
+      uId = Math.max(...state.plats.map(tache => tache.id)) + 1
+    }
+    // Ajoute le nouvel id à la tache
+    plat.id = uId
+    // Commite l'ajout
+    context.commit('addPlat', plat)
   }
 }
 

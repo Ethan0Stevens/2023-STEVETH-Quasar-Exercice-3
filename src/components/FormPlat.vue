@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   props: ['action'],
   data () {
@@ -94,9 +96,12 @@ export default {
     },
   },
   methods: {
+    ...mapActions('plats', ['addPlat']),
     verifiyInputs() {
       this.inputsValid.name = this.isNameValid
       this.inputsValid.description = this.isDescriptionValid
+
+      if (this.inputsValid.name && this.inputsValid.description) this.addPlat(this.plat)
     }
   }
 }

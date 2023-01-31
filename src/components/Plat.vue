@@ -36,7 +36,8 @@
     <q-btn
       icon="delete"
       color="red"
-      flat>Supprimer</q-btn>
+      flat
+      @click="customBtn()">Supprimer</q-btn>
   </q-card-actions>
 
   <q-dialog
@@ -47,7 +48,10 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
+  name: 'Plat',
   props: ['plat'],
   data () {
     return {
@@ -56,7 +60,28 @@ export default {
   },
   components: {
     'form-plat': require('components/FormPlat.vue').default
-  }
+  },
+  methods: {
+    ...mapActions('plats', ['deletePlat']),
+    customBtn () {
+      this.$q.dialog({
+        title: 'Confirmation',
+        message: 'Voulez-vous vraiment le supprimer ?',
+        ok: {
+          push: true,
+          color: 'negative',
+          label: 'Supprimer'
+        },
+        cancel: {
+          push: true,
+          label: 'Annuler'
+        },
+        persistent: true
+      }).onOk(() => {
+        this.deletePlat(this.plat)
+      })
+    }
+  },
 }
 </script>
 

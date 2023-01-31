@@ -39,14 +39,18 @@ Mutations : méthode qui manipulent les données
 Les mutations ne peuvent pas être asynchrones !!!
  */
 const mutations = {
-
+  deletePlat(state, plat) {
+    state.plats.splice(state.plats.indexOf(plat), 1)
+  }
 }
 /*
 Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
-
+  deletePlat (context, plat) {
+    context.commit('deletePlat', plat)
+  }
 }
 
 /*

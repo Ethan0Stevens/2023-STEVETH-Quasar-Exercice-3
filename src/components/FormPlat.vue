@@ -8,10 +8,12 @@
 
     <div class="row q-mb-md">
       <q-input
-        filled
-        v-model="plat.nom"
+        v-model="plat.name"
         label="Nom (Burger)"
-        class="col" />
+        class="col"
+        :bg-color="inputsValid.name ? 'lightGray' : 'red'"
+        :standout="inputsValid.name  ? 'bg-grey text-black' : 'bg-red text-white'"
+        :placeholder="inputsValid.name ? '' : 'La description ne doit pas dépasser 155 caracteres'" />
     </div>
 
     <div class="row q-mb-md">
@@ -20,7 +22,10 @@
         v-model="plat.description"
         label="Description"
         type="textarea"
-        class="col" />
+        class="col"
+        :bg-color="inputsValid.description ? 'lightGray' : 'red'"
+        :standout="inputsValid.description  ? 'bg-grey text-black' : 'bg-red text-white'"
+        :placeholder="inputsValid.description ? '' : 'Le nom ne doit pas dépasser 20 caracteres'"/>
     </div>
 
     <div class="row q-mb-md">
@@ -57,7 +62,8 @@
     <q-btn
       label="Sauver"
       color="primary"
-      v-close-popup />
+      @click="verifiyInputs()"
+      v-close-popup="inputsValid.description && inputsValid.name"/>
   </q-card-actions>
 </q-card>
 </template>
@@ -72,7 +78,25 @@ export default {
         description: '',
         note: 1,
         image: ''
+      },
+      inputsValid: {
+        name: true,
+        description: true
       }
+    }
+  },
+  computed: {
+    isNameValid () {
+      return this.plat.name.length <= 20 && this.plat.name.length > 0
+    },
+    isDescriptionValid() {
+      return this.plat.description.length <= 155 && this.plat.description.length > 0
+    },
+  },
+  methods: {
+    verifiyInputs() {
+      this.inputsValid.name = this.isNameValid
+      this.inputsValid.description = this.isDescriptionValid
     }
   }
 }

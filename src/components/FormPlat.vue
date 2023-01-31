@@ -88,11 +88,17 @@ export default {
     }
   },
   computed: {
-    // Retourne si le champ de saisi du nom est valide
+    /**
+     * Retourne si le champ de saisi du nom est valide
+     * @returns {boolean}
+     */
     isNameValid () {
       return this.plat.name.length <= 20 && this.plat.name.length > 0
     },
-    // Retourne si le champ de saisi de la description est valide
+    /**
+     * Retourne si le champ de saisi de la description est valide
+     * @returns {boolean}
+     */
     isDescriptionValid() {
       return this.plat.description.length <= 155
     },
@@ -101,7 +107,9 @@ export default {
     // Mapage des actions du store
     ...mapActions('plats', ['addPlat', 'modifyPlat']),
 
-    // Verification des champs de saisies du formulaire
+    /**
+     * Verification des champs de saisies du formulaire
+     */
     verifiyInputs() {
       this.inputsValid.name = this.isNameValid // Verification du nom
       this.inputsValid.description = this.isDescriptionValid // Verification de la description
@@ -109,7 +117,9 @@ export default {
       // Si tout les champs de saisis sont correct ,alors envoyer le formulaire
       if (this.inputsValid.name && this.inputsValid.description) this.formSubmit()
     },
-    // Envoie du formulaire
+    /**
+     * Envoie du formulaire
+     */
     formSubmit () {
     if (this.plat.id) {
         // Construction du payload

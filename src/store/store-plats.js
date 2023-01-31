@@ -39,12 +39,27 @@ Mutations : méthode qui manipulent les données
 Les mutations ne peuvent pas être asynchrones !!!
  */
 const mutations = {
+  /**
+   * Supprimer un plat donné en parametre
+   * @param state
+   * @param plat le plat a supprimer du store
+   */
   deletePlat(state, plat) {
-    state.plats.splice(state.plats.indexOf(plat), 1)
+    state.plats.splice(state.plats.indexOf(plat), 1) // Coupe le plat de la liste de plats, à l'index trouvé
   },
+  /**
+   * Ajouter un plat donné en parametre
+   * @param state
+   * @param plat le plat a ajouter au store
+   */
   addPlat(state, plat) {
     state.plats.push(plat)
   },
+  /**
+   * Modifie un plat donné en parametre par le payload
+   * @param state
+   * @param payload le payload contenant les informations du plat
+   */
   modifyPlat (state, payload) {
     // Recherche le plat et retourne sa position dans le tableau, son index
     const index = state.plats.findIndex(el => el.id === payload.id)
@@ -61,9 +76,19 @@ Actions : méthodes du magasin qui font appel aux mutations
 Elles peuvent être asynchrones !
  */
 const actions = {
+  /**
+   * Action permetant de supprimer un plat du store
+   * @param commit
+   * @param plat le plat a supprimer
+   */
   deletePlat ({ commit }, plat) {
     commit('deletePlat', plat)
   },
+  /**
+   * Action qui permet l'ajout d'un plat dans le store
+   * @param commit
+   * @param plat le plat a ajouter
+   */
   addPlat ({ commit }, plat) {
     let uId = 1
     // Si le tableau contient des éléments
@@ -76,6 +101,11 @@ const actions = {
     // Commite l'ajout
     commit('addPlat', plat)
   },
+  /**
+   * Action qui permet de modifier un plat du store
+   * @param commit
+   * @param payload le payload qui contient les infos du plat
+   */
   modifyPlat ({ commit }, payload) {
     // Valide la mutation et y passe les données
     commit('modifyPlat', payload)

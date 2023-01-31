@@ -39,7 +39,7 @@
       icon="delete"
       color="red"
       flat
-      @click="customBtn()">Supprimer</q-btn>
+      @click="dialogDelete()">Supprimer</q-btn>
   </q-card-actions>
 
   <q-dialog
@@ -67,7 +67,11 @@ export default {
   methods: {
     // Mapage des actions du store
     ...mapActions('plats', ['deletePlat', 'modifyPlat']),
-    customBtn () {
+
+    /**
+     * Creation d'une dialog box de validation de suppression
+     */
+    dialogDelete () {
       this.$q.dialog({
         title: 'Confirmation',
         message: 'Voulez-vous vraiment le supprimer ?',

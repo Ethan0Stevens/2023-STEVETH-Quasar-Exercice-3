@@ -61,7 +61,10 @@ export default {
     'form-plat': require('components/FormPlat.vue').default
   },
   computed: {
-    // récupérer tous les plats
+    /**
+     * Récupérer tous les plats dans le store
+     * @returns {any}
+     */
     plats () {
       // appele du getter dans le store
       return this.$store.getters["plats/getPlats"]

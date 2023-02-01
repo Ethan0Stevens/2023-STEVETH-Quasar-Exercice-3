@@ -118,6 +118,11 @@ Fonctionne comme les propriétés calculées
 Sert à calculer, trier, filtrer ou formater les donneés
  */
 const getters = {
+  /**
+   * Getter de tout les plats du store
+   * @param state
+   * @returns {[{image: string, note: number, name: string, description: string, id: number},{image: string, note: number, name: string, description: string, id: number},{image: string, note: number, name: string, description: string, id: number},{image: string, note: number, name: string, description: string, id: number}]}
+   */
   getPlats (state) {
     return state.plats
   }

@@ -94,9 +94,9 @@ const actions = {
     // Si le tableau contient des éléments
     if (state.plats.length) {
       // Récupère l'id MAX et lui ajoute 1
-      uId = Math.max(...state.plats.map(tache => tache.id)) + 1
+      uId = Math.max(...state.plats.map(plat => plat.id)) + 1
     }
-    // Ajoute le nouvel id à la tache
+    // Ajoute le nouvel id au plat
     plat.id = uId
     // Commite l'ajout
     commit('addPlat', plat)

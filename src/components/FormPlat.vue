@@ -72,6 +72,7 @@
 import {mapActions} from "vuex";
 
 export default {
+  name: 'PageFormPlat',
   props: ['action', 'platToModify'],
   data () {
     return {

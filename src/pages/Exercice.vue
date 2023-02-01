@@ -50,6 +50,7 @@ Exercice 3 - Vuex & Formulaires
 
 <script>
 export default {
+  name: 'PageExercice',
   data () {
     return {
       afficherFormPlat: false

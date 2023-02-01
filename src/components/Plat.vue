@@ -54,7 +54,7 @@
 import { mapActions } from "vuex";
 
 export default {
-  name: 'Plat',
+  name: 'PagePlat',
   props: ['plat'],
   data () {
     return {

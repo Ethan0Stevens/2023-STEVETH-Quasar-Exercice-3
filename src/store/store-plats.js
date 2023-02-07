@@ -44,6 +44,7 @@ const mutations = {
    * @param state
    * @param plat le plat a supprimer du store
    */
+  // TODO renommer actions en majucules deletePlat => DELETE_PLAT
   deletePlat(state, plat) {
     state.plats.splice(state.plats.indexOf(plat), 1) // Coupe le plat de la liste de plats, à l'index trouvé
   },
@@ -124,7 +125,12 @@ const getters = {
    * @returns {[{image: string, note: number, name: string, description: string, id: number},{image: string, note: number, name: string, description: string, id: number},{image: string, note: number, name: string, description: string, id: number},{image: string, note: number, name: string, description: string, id: number}]}
    */
   getPlats (state) {
-    return state.plats
+    return [...state.plats].sort((a, b) => a.name.localeCompare(b.name, 'fr')) // TODO Les getters
+    // TODO retourner avec un filtre ou un tri
+    // TODO Toujours retourner une copie (par valeur et pas par référence)
+    // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+    // https://usefulangle.com/post/227/javascript-sort-array-of-objects
+    // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
   }
 }
 

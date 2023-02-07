@@ -1,8 +1,10 @@
 <template>
 <q-card
   class="card">
+  <!-- TODO Ajouter image de remplacement -->
   <q-img
-    :src="plat.image.length === 0 ? 'statics/image-placeholder.png' : plat.image"
+    :src="plat.image.length === 0 ? 'https://picsum.photos/id/23/200' :
+    plat.image"
     basic
     contain
   >
@@ -23,7 +25,9 @@
 
   <q-card-section class="description" >
     <!-- Affiche le text 'Aucune description fournie' en cas de description vide -->
-    <i v-show="plat.description.length === 0">Aucune description fournie</i>
+    <!-- TODO UTILISER UNE DIV -->
+    <div class="text-italic" v-show="plat.description.length === 0">Aucune description
+      fournie</div>
     {{ plat.description }}
   </q-card-section>
 

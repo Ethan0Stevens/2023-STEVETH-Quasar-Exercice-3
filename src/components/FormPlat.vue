@@ -34,8 +34,9 @@
         v-model="plat.image"
         label="URL de l'image"
         class="col" />
+      <!-- TODO Ajouter image de remplacement -->
       <q-img
-        :src="plat.image ? plat.image : 'statics/image-placeholder.png'"
+        :src="plat.image ? plat.image : 'https://picsum.photos/id/23/200'"
         class="q-ml-sm"
         contain />
     </div>
@@ -139,7 +140,8 @@ export default {
   mounted () {
     if (this.platToModify) {
       // Copie les propriétés de platToModify dans un nouvel objet vide
-      this.plat = Object.assign({}, this.platToModify)
+      // this.plat = Object.assign({}, this.platToModify)
+      this.plat = {...this.platToModify}
     }
   }
 }
